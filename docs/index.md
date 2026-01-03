@@ -1,16 +1,16 @@
-# Welcome to GhostMicro GhostPass
-Documentation for the Next-Gen Mnemonic Serial Key Distribution System.
+# ยินดีต้อนรับสู่ GhostMicro GhostPass
+เอกสารสำหรับระบบการแจกจ่าย Serial Key แบบ Mnemonic ยุคใหม่
 
-## Overview
-GhostPass v8.1 is a human-centric serial key system that replaces cryptic traditional codes with a 12-word mnemonic phrase (GhostPass). Built on the 2048-word BIP-39 standard, it ensures high security while being easy for humans to read, remember, and record.
+## ภาพรวม
+GhostPass v8.1 เป็นระบบ Serial Key ที่เน้นมนุษย์เป็นศูนย์กลาง โดยแทนที่รหัสอันซับซ้อนแบบเดิมด้วยวลีช่วยจำ 12 คำ (GhostPass) สร้างขึ้นบนมาตรฐาน BIP-39 ขนาด 2048 คำ มั่นใจได้ในความปลอดภัยระดับสูง ในขณะที่มนุษย์สามารถอ่าน จำ และบันทึกได้ง่าย
 
-## Core Pillars
-- **GhostPass Standard**: A structured 12-position mapping for licensing data.
-- **2048-Word Dictionary**: Uses verified, unambiguous English words.
-- **API-First Security**: Master Secret is hidden on the server, accessible only via API.
-- **Built-in Security**: Word #12 acts as a dedicated Security Checksum (รปภ).
+## แกนหลัก
+- **มาตรฐาน GhostPass**: การจับคู่ตำแหน่ง 12 จุดอย่างมีโครงสร้างสำหรับข้อมูลลิขสิทธิ์
+- **พจนานุกรม 2048 คำ**: ใช้คำภาษาอังกฤษที่ผ่านการตรวจสอบและไม่มีความกำกวม
+- **ความปลอดภัยแบบ API-First**: Master Secret ถูกซ่อนอยู่บนเซิร์ฟเวอร์ เข้าถึงได้ผ่าน API เท่านั้น
+- **ความปลอดภัยในตัว**: คำที่ 12 ทำหน้าที่เป็น Security Checksum (ผู้คุ้มกฎ.) โดยเฉพาะ
 
-## Components
-- **API Engine (Next.js)**: The headless hub for encoding and decoding requests.
-- **Documentation**: Comprehensive manuals for users and developers.
-- **Integration Guide**: API reference for connecting external applications.
+## องค์ประกอบ
+- **API Engine (Next.js)**: ศูนย์กลางแบบ Headless สำหรับการร้องขอการเข้ารหัสและถอดรหัส
+- **เอกสารประกอบ**: คู่มือที่ครอบคลุมสำหรับผู้ใช้และนักพัฒนา
+- **คู่มือการรวมระบบ**: เอกสารอ้างอิง API สำหรับการเชื่อมต่อแอปพลิเคชันภายนอก

@@ -1,45 +1,45 @@
-# Developer Guide: GhostPass Engine
+# คู่มือสำหรับนักพัฒนา: GhostPass Engine
 
-Technical implementation details for developers integrating with the GhostPass v8.1 standard.
+รายละเอียดทางเทคนิคสำหรับการนำไปใช้งาน สำหรับนักพัฒนาที่ต้องการเชื่อมต่อกับมาตรฐาน GhostPass v8.1
 
-## 📐 Data Architecture
-GhostPass v8.1 uses a **Position-Based Mapping** approach rather than raw bit-stream serialization. 
+## 📐 สถาปัตยกรรมข้อมูล
+GhostPass v8.1 ใช้แนวทาง **Position-Based Mapping** (การจับคู่ตามตำแหน่ง) แทนการใช้ raw bit-stream serialization
 
-- **Dictionary**: 2048 words (BIP-39 English).
-- **Indexing**: Each word index is an 11-bit integer (0 to 2047).
-- **Phrase Length**: Exactly 12 words.
+- **พจนานุกรม**: 2048 คำ (BIP-39 ภาษาอังกฤษ)
+- **การดัชนี**: ดัชนีของแต่ละคำคือจำนวนเต็มขนาด 11-bit (0 ถึง 2047)
+- **ความยาววลี**: 12 คำเป๊ะๆ
 
-### Word Mapping Logic
-The engine takes an object containing 11 numeric fields and maps them to word indices. **A `masterSecret` (Salt) is required for both encoding and decoding.**
+### ตรรกะการจับคู่คำ
+ตัว Engine จะรับ object ที่ประกอบด้วยฟิลด์ตัวเลข 11 ช่อง และจับคู่ค่าเหล่านั้นเข้ากับดัชนีคำ **จำเป็นต้องใช้ `masterSecret` (Salt) สำหรับทั้งการเข้ารหัส (Encoding) และถอดรหัส (Decoding)**
 
 ```typescript
-// Example Encoding with Secret Salt
+// ตัวอย่างการเข้ารหัสด้วย Secret Salt
 const phrase = encodeGhostPass(data, "your_custom_salt");
 ```
 
 ```typescript
 const indices = [
-  data.role,        // Word 1
-  data.type,        // Word 2
-  data.name,        // Word 3
-  data.reserved1,   // Word 4 (Future)
-  data.version,     // Word 5
-  data.model,       // Word 6
-  data.prodDate,    // Word 7
-  data.actDate,     // Word 8
-  data.expiryDate,  // Word 9
-  data.sku,         // Word 10
-  data.reserved2    // Word 11 (Future)
+  data.role,        // คำที่ 1
+  data.type,        // คำที่ 2
+  data.name,        // คำที่ 3
+  data.reserved1,   // คำที่ 4 (อนาคต)
+  data.version,     // คำที่ 5
+  data.model,       // คำที่ 6
+  data.prodDate,    // คำที่ 7
+  data.actDate,     // คำที่ 8
+  data.expiryDate,  // คำที่ 9
+  data.sku,         // คำที่ 10
+  data.reserved2    // คำที่ 11 (อนาคต)
 ];
 ```
 
-## 🛡️ Security Checksum (The "Guard")
-Word 12 is the security signature. It is calculated by hashing the indices combined with the `masterSecret`. This ensures that even if an attacker knows the first 11 words, they cannot generate the correct 12th word without the secret salt.
+## 🛡️ Security Checksum (ผู้คุมกฎ)
+คำที่ 12 คือลายเซ็นความปลอดภัย (Security Signature) คำนวณจากการ Hashing ค่าดัชนีรวมกับ `masterSecret` สิ่งนี้ช่วยให้มั่นใจว่าแม้ผู้โจมตีจะรู้คำ 11 คำแรก แต่ก็ไม่สามารถสร้างคำที่ 12 ที่ถูกต้องได้หากไม่มี Secret Salt
 
-## 🚀 How to Integrate
-The core logic is located in `@/data/mnemonic.ts`. 
+## 🚀 วิธีการรวมระบบ (Integration)
+ตรรกะหลักตั้งอยู่ที่ `@/data/mnemonic.ts`
 
-### Encoding
+### การเข้ารหัส (Encoding)
 ```typescript
 import { encodeGhostPass } from './data/mnemonic';
 
@@ -48,7 +48,7 @@ const phrase = encodeGhostPass(myData, "my_secret_salt");
 // Returns: ["abandon", "ability", ...]
 ```
 
-### Decoding
+### การถอดรหัส (Decoding)
 ```typescript
 import { decodeGhostPass } from './data/mnemonic';
 
