@@ -15,7 +15,10 @@ theme:
 nav:
   - Welcome: index.md
   - 📖 User Manual: user-guide.md
-  - ⚙️ Technical Specs: dev-guide.md
+  - สำหรับนักพัฒนา:
+    - คู่มือการบำรุงรักษา: dev-guide/maintenance.md
+    - โครงสร้างโปรเจกต์: dev-guide/structure.md
+    - มาตรฐาน GRIDS-IOT: dev-guide/grids-iot-v1.md
   - 🌐 API Reference: api-reference.md
 
 markdown_extensions:
